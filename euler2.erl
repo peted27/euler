@@ -1,20 +1,20 @@
 -module(euler2).
--export([start/0]).
+-export([solve/0, solve/1]).
 
-start() ->
-    fib().
+solve() ->
+    solve(4000000).
 
-fib() ->
-    fib(0, 1, 0).
+solve(N) ->
+    Fibs = fib(N),
+    EvenFibs = lists:filter(fun(X) -> X rem 2 == 0 end, Fibs),
+    lists:foldl(fun(X, Sum) -> X + Sum end, 0, EvenFibs).
 
-fib(Result, Next, Acc) when Result < 4000000 ->
-    EvenFib = if
-        trunc(Result / 2) * 2 == Result ->
-            Result;
-        true ->
-            0
-    end,
-    fib(Next, Next + Result, Acc+EvenFib);
-fib(_Result, _Next, Acc) ->
-    Acc.
 
+fib(N) ->
+    fib(N, 0, 1, [0]).
+
+fib(N, Current, Next, Fibs) ->
+    if 
+	Next > N -> lists:reverse(Fibs);
+	true -> fib(N, Next, Next + Current, [Next | Fibs])
+    end.

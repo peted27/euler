@@ -1,7 +1,10 @@
 -module(euler1).
--export([start/1]).
+-export([solve/0, solve/1]).
 
-start(N) ->
+solve() ->
+    fact(999).
+
+solve(N) ->
     fact(N).
 
 fact(N) ->
