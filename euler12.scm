@@ -1,4 +1,15 @@
-(define-structure triangle num nth)
+;(define-structure triangle num nth)
+
+;; created these functions to emulate gambit-c structure stuff in chicken
+;; probably need to find out what native data type to use instead..
+(define (make-triangle x y)
+  (list x y))
+
+(define (triangle-num tri)
+  (car tri))
+
+(define (triangle-nth tri)
+  (cadr tri))
 
 (define (next-triangle tri)
   (let* ((next-nth (+ (triangle-nth tri) 1))
